@@ -1,0 +1,43 @@
+defaultTasks "finalHello" // defaultTasks "hello2", "hello"
+
+task hello2(dependsOn : "hello") << {
+    println "Hello world 2!!"
+}
+
+task finalHello(dependsOn: ["hello2", "hello3"]) << {
+    println "Hello world final!!"
+}
+
+task hello << {
+    println "Hello world!!"
+    println(new Date())
+}
+
+task helloVeryFirst << {
+    println "Hello world very first!!"
+}
+
+task hello3 << {
+    3.times{
+        println "Hello world 3!!" + it
+    }
+}
+
+hello << {
+    println "Extension of existing task"
+}
+
+hello.doFirst {
+    println "Extension of existing task and should be done first"
+}
+
+// add a dependency
+if(isThisTime(1)) // usage: trigger IT only night time
+{
+    hello.dependsOn "helloVeryFirst"
+}
+
+static boolean isThisTime(def n)
+{
+    return n % 2 == 0
+}
