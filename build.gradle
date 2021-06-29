@@ -1,43 +1,14 @@
-defaultTasks "finalHello" // defaultTasks "hello2", "hello"
-
-task hello2(dependsOn : "hello") << {
-    println "Hello world 2!!"
+plugins {
+    id 'java-library'
 }
 
-task finalHello(dependsOn: ["hello2", "hello3"]) << {
-    println "Hello world final!!"
+repositories{
+    jcenter()
 }
 
-task hello << {
-    println "Hello world!!"
-    println(new Date())
-}
-
-task helloVeryFirst << {
-    println "Hello world very first!!"
-}
-
-task hello3 << {
-    3.times{
-        println "Hello world 3!!" + it
-    }
-}
-
-hello << {
-    println "Extension of existing task"
-}
-
-hello.doFirst {
-    println "Extension of existing task and should be done first"
-}
-
-// add a dependency
-if(isThisTime(1)) // usage: trigger IT only night time
-{
-    hello.dependsOn "helloVeryFirst"
-}
-
-static boolean isThisTime(def n)
-{
-    return n % 2 == 0
+dependencies{
+    testImplementation 'junit:junit:4.13'
+    api 'org.apache.commons:commons-math3:3.6.1'
+    implementation 'com.google.guava:guava:29.0-jre'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
 }

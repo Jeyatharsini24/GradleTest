@@ -1,0 +1,2 @@
+-gradle tasks will result all the available tasks
+-gradle clean build --info : prints tasks under this command
